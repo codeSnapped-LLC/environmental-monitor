@@ -1,0 +1,76 @@
+# -----------------------------------------
+# Ansible project exclusions
+# -----------------------------------------
+*.retry
+*.log
+*.tar.gz
+*.tar
+*.zip
+*.bak
+*.orig
+*.tmp
+
+# Ansible vault file backups
+*.vault
+*.vault_pass.txt
+*.secret
+*.enc
+
+# Ansible local files
+*.local.yml
+inventory.ini
+inventory/*
+!inventory/README.md
+
+# SSH keys or secrets
+*.pem
+*.key
+*.crt
+
+# Molecule test artifacts
+.molecule/
+.cache/
+test-reports/
+
+# Python-related (if used for dynamic inventory or roles)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env/
+Pipfile.lock
+poetry.lock
+
+# -----------------------------------------
+# macOS crap
+# -----------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# macOS Finder metadata
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+
+# -----------------------------------------
+# Windows crap
+# -----------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+System Volume Information/
+
+# -----------------------------------------
+# Editor & IDE
+# -----------------------------------------
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-*
