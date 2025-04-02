@@ -1,10 +1,16 @@
 #!/bin/bash
 
 # Source environment variables
-if [ -f /etc/default/data-collector ]; then
-    . /etc/default/data-collector
+if [ -f /etc/default/data-collector-heavy ]; then
+    . /etc/default/data-collector-heavy
 fi
 
-# Run the service
-cd /opt/data-collector
-exec uvicorn server:app --host 0.0.0.0 --port 8000 --no-access-log
+# Run with production settings
+cd /opt/data-collector-heavy
+exec gunicorn server:app \
+    --workers 4 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 0.0.0.0:8000 \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile -
