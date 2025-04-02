@@ -5,6 +5,7 @@ from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import MQTT_CONFIG, DB_FILE
+from database import get_recent_readings
 import logging
 import asyncio
 
