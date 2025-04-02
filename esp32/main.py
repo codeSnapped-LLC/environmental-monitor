@@ -3,7 +3,17 @@ import json
 from machine import Pin, I2C
 from umqtt.simple import MQTTClient
 from sensors import EnvironmentalSensor
-from config import SENSOR_UPDATE_INTERVAL, MQTT_BROKER, MQTT_PORT, MQTT_TOPIC, MQTT_CLIENT_ID, MQTT_USER, MQTT_PASSWORD
+from config import (
+    SENSOR_UPDATE_INTERVAL, 
+    MQTT_BROKER, 
+    MQTT_PORT, 
+    MQTT_TOPIC, 
+    MQTT_CLIENT_ID, 
+    MQTT_USER, 
+    MQTT_PASSWORD,
+    SOIL_DEPTH_1,
+    SOIL_DEPTH_2
+)
 
 def connect_mqtt():
     client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT, 

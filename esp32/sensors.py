@@ -1,4 +1,5 @@
 from machine import I2C, Pin
+from config import SOIL_DEPTH_1
 
 class EnvironmentalSensor:
     def __init__(self, i2c_bus=0, sda_pin=8, scl_pin=9):
