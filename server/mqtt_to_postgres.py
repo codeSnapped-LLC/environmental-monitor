@@ -4,9 +4,24 @@ import psycopg2
 import paho.mqtt.client as mqtt
 from datetime import datetime
 
-# Configuration
+# Authentication Configuration
+AUTH_MODE = "CERT"  # CERT, API_KEY, or USERPASS
+
+# Certificate Authentication
+MQTT_CA_FILE = "certs/ca.crt"
+MQTT_CERT_FILE = "certs/server.crt"
+MQTT_KEY_FILE = "certs/server.key"
+
+# API Key Authentication
+MQTT_API_KEY = None  # Set if using API keys
+
+# Username/Password Authentication
+MQTT_USER = None
+MQTT_PASSWORD = None
+
+# MQTT Configuration
 MQTT_BROKER = "localhost"
-MQTT_PORT = 1883
+MQTT_PORT = 8883  # Default TLS port
 MQTT_TOPIC = "sensors/environment"
 POSTGRES_CONFIG = {
     "host": "localhost",
@@ -69,9 +84,20 @@ def main():
     create_table(conn)
     conn.close()
     
-    # Setup MQTT client
+    # Setup MQTT client with authentication
     client = mqtt.Client()
     client.on_message = on_message
+    
+    if AUTH_MODE == "CERT":
+        client.tls_set(
+            ca_certs=MQTT_CA_FILE,
+            certfile=MQTT_CERT_FILE,
+            keyfile=MQTT_KEY_FILE
+        )
+    elif AUTH_MODE == "API_KEY":
+        client.username_pw_set(MQTT_API_KEY, "")
+    else:  # USERPASS
+        client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
     
     client.connect(MQTT_BROKER, MQTT_PORT)
     client.subscribe(MQTT_TOPIC)

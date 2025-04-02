@@ -140,8 +140,61 @@ python server/mqtt_to_postgres.py
    mosquitto_sub -t sensors/environment -v
    ```
 
-## Future Enhancements
-- [ ] Add authentication for MQTT
+## Security Configuration
+
+```mermaid
+graph TD
+    A[ESP32] -->|TLS 1.2+| B[MQTT Broker]
+    B -->|Verify Client Cert| A
+    B -->|Verify Server Cert| A
+```
+
+### Recommended Authentication Methods:
+1. **Client Certificates (Most Secure)**
+   - Uses mutual TLS authentication
+   - Requires:
+     - CA certificate
+     - Client certificate
+     - Client private key
+   ```bash
+   # Generate certificates (run on server)
+   openssl req -new -x509 -days 365 -nodes -out ca.crt -keyout ca.key
+   openssl genrsa -out client.key 2048
+   openssl req -new -out client.csr -key client.key
+   openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 365
+   ```
+
+2. **API Keys (Medium Security)**
+   - Simple token-based authentication
+   - Configure in `config.py`:
+   ```python
+   AUTH_MODE = "API_KEY"
+   MQTT_API_KEY = "your-long-random-key"
+   ```
+
+3. **Username/Password (Basic Security)**
+   - Traditional credentials
+   - Configure in `config.py`:
+   ```python
+   AUTH_MODE = "USERPASS"
+   MQTT_USER = "username"
+   MQTT_PASSWORD = "strong-password"
+   ```
+
+### Certificate Deployment:
+1. Place certificates on ESP32:
+```bash
+ampy put certs/client.crt /certs/client.crt
+ampy put certs/client.key /certs/client.key
+ampy put certs/ca.crt /certs/ca.crt
+```
+
+2. Configure server certificates:
+```bash
+mkdir -p server/certs
+cp ca.crt server/certs/
+cp server.{crt,key} server/certs/
+```
 - [ ] Implement data encryption
 - [ ] Add alerting system
 - [ ] Dashboard for data visualization

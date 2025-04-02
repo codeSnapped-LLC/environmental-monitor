@@ -16,8 +16,34 @@ from config import (
 )
 
 def connect_mqtt():
-    client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT, 
-                       user=MQTT_USER, password=MQTT_PASSWORD)
+    if AUTH_MODE == "CERT":
+        with open(MQTT_CERT_FILE, 'r') as f:
+            cert = f.read()
+        with open(MQTT_KEY_FILE, 'r') as f:
+            key = f.read()
+        with open(MQTT_CA_FILE, 'r') as f:
+            ca = f.read()
+            
+        ssl_params = {
+            'cert': cert,
+            'key': key,
+            'ca_certs': ca,
+            'server_side': False
+        }
+        client = MQTTClient(
+            MQTT_CLIENT_ID,
+            MQTT_BROKER,
+            port=MQTT_PORT,
+            ssl=True,
+            ssl_params=ssl_params
+        )
+    elif AUTH_MODE == "API_KEY":
+        client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT)
+        client.set_auth(MQTT_API_KEY, "")
+    else:  # USERPASS
+        client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT,
+                          user=MQTT_USER, password=MQTT_PASSWORD)
+    
     client.connect()
     return client
 

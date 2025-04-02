@@ -38,10 +38,23 @@ LORA_FREQUENCY = 915000000  # Adjust based on region
 LORA_NODE_ID = 1  # Unique for each node
 LORA_GATEWAY_ID = 0  # 0 for gateway nodes
 
-# MQTT Configuration (for WiFi mode)
-MQTT_BROKER = "your.server.ip"
-MQTT_PORT = 1883
-MQTT_TOPIC = "sensors/environment"
-MQTT_CLIENT_ID = "esp32-tinys3"
+# MQTT Authentication Options
+AUTH_MODE = "CERT"  # CERT, API_KEY, or USERPASS
+
+# Certificate Authentication
+MQTT_CERT_FILE = "/certs/client.crt"
+MQTT_KEY_FILE = "/certs/client.key"
+MQTT_CA_FILE = "/certs/ca.crt"
+
+# API Key Authentication
+MQTT_API_KEY = None  # Set if using API keys
+
+# Username/Password Authentication
 MQTT_USER = None
 MQTT_PASSWORD = None
+
+# MQTT Configuration (for WiFi mode)
+MQTT_BROKER = "your.server.ip"
+MQTT_PORT = 8883  # Default TLS port
+MQTT_TOPIC = "sensors/environment"
+MQTT_CLIENT_ID = "esp32-tinys3"
