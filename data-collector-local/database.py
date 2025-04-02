@@ -2,16 +2,34 @@ import sqlite3
 from datetime import datetime, timedelta
 from config import DB_FILE, MAX_RECORDS
 
-def get_recent_readings(limit=100):
-    """Get most recent sensor readings"""
+def get_device_readings(device_id, hours=None):
+    """Get readings for specific device with time window"""
+    query = """
+    SELECT sensor_type, AVG(sensor_value) as avg_value, 
+           strftime('%Y-%m-%d %H:00', recorded_at) as hour
+    FROM sensor_readings
+    WHERE device_id = ?
+    """
+    params = [device_id]
+    
+    if hours:
+        query += " AND recorded_at > datetime('now', ?)"
+        params.append(f"-{hours} hours")
+    
+    query += " GROUP BY sensor_type, hour ORDER BY hour"
+    
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    cursor.execute("""
-    SELECT * FROM sensor_readings 
-    ORDER BY recorded_at DESC 
-    LIMIT ?
-    """, (limit,))
-    results = cursor.fetchall()
+    cursor.execute(query, params)
+    
+    # Transform into time series format
+    results = {}
+    for row in cursor.fetchall():
+        sensor, value, hour = row
+        if sensor not in results:
+            results[sensor] = []
+        results[sensor].append({"hour": hour, "value": value})
+    
     conn.close()
     return results
 

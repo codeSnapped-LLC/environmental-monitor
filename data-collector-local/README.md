@@ -64,25 +64,64 @@ The service provides these REST endpoints:
   - Parameters:
     - `limit`: Number of records to return (default: 100)
 
-Example response:
+Example API responses:
+
+List all devices:
 ```json
-[
-  {
-    "id": 1,
-    "device_id": "esp32-1",
-    "air_temp": 22.5,
-    "humidity": 45.2,
-    "soil_temp_10cm": 18.3,
-    "soil_temp_30cm": 16.7,
-    "ph": 6.8,
-    "air_quality": 342,
-    "water_temp": 18.2,
-    "water_ph": 7.1,
-    "water_turbidity": 12.5,
-    "water_tds": 350,
-    "recorded_at": "2025-04-02T14:30:45Z"
+{
+  "devices": [
+    {
+      "id": "esp32-field1",
+      "name": "North Field Station",
+      "location": "45.123,-122.456"
+    },
+    {
+      "id": "esp32-pond1", 
+      "name": "Pond Monitor",
+      "location": "45.125,-122.458"
+    }
+  ]
+}
+```
+
+Get filtered readings:
+```json
+{
+  "readings": [
+    {
+      "id": 42,
+      "device_id": "esp32-pond1",
+      "sensor_type": "water_temp",
+      "sensor_value": 18.2,
+      "sensor_units": "C",
+      "recorded_at": "2025-04-02T14:30:45Z"
+    },
+    {
+      "id": 41,
+      "device_id": "esp32-pond1",
+      "sensor_type": "water_ph",
+      "sensor_value": 7.1,
+      "sensor_units": "pH",
+      "recorded_at": "2025-04-02T14:25:30Z" 
+    }
+  ]
+}
+```
+
+Example MQTT message format from devices:
+```json
+{
+  "device_id": "esp32-field1",
+  "sensors": {
+    "bme280": {"measures": ["temp", "humidity"]},
+    "ds18b20": {"measures": ["soil_temp"]}
+  },
+  "readings": {
+    "air_temp": {"value": 22.5, "units": "C"},
+    "humidity": {"value": 45.2, "units": "%"},
+    "soil_temp_10cm": {"value": 18.3, "units": "C"}
   }
-]
+}
 ```
 
 ### Water Monitoring Setup
