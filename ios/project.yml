@@ -1,0 +1,19 @@
+name: ESP32Monitor
+options:
+  bundleIdPrefix: com.yourcompany
+packages: {}
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.ESP32Monitor
+    IPHONEOS_DEPLOYMENT_TARGET: "14.0"
+targets:
+  ESP32Monitor:
+    type: application
+    platform: iOS
+    sources: [ESP32Monitor]
+    settings:
+      base:
+        INFOPLIST_FILE: ESP32Monitor/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.ESP32Monitor
+    dependencies:
+      - framework: CoreBluetooth.framework
