@@ -1,4 +1,4 @@
-from machine import I2C
+from machine import I2C, Pin
 
 class EnvironmentalSensor:
     def __init__(self, i2c_bus=0, sda_pin=21, scl_pin=22):
