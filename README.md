@@ -279,6 +279,21 @@ python server/mqtt_to_postgres.py
 
 ## Security Configuration
 
+### User Authentication
+- Default admin credentials: `admin` / `Admin@1234Temp!` (change immediately)
+- Password requirements:
+  - Minimum 12 characters
+  - Requires uppercase, lowercase, number and special character
+  - Argon2id hashing with 512MB memory cost
+  - Rate limiting (5 attempts/hour)
+  - Account lockout after 5 failed attempts
+  
+### Privacy Features
+- Data anonymization for deleted users
+- Right-to-be-forgotten implementation
+- GDPR-compliant data retention policies
+- End-to-end encryption for sensitive metrics
+
 ```mermaid
 graph TD
     A[ESP32] -->|TLS 1.2+| B[MQTT Broker]
@@ -332,7 +347,8 @@ mkdir -p server/certs
 cp ca.crt server/certs/
 cp server.{crt,key} server/certs/
 ```
-- [ ] Implement data encryption
+- [x] User authentication system
+- [x] Password storage with Argon2id
 - [ ] Add alerting system
 - [ ] Dashboard for data visualization
 - [ ] OTA firmware updates
