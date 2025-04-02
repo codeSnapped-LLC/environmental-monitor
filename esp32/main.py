@@ -22,9 +22,10 @@ def main():
         try:
             # Read sensor data
             data = {
-                "temperature": sensor.read_temperature(),
-                "humidity": sensor.read_humidity(),
-                "air_quality": sensor.read_air_quality(),
+                "air_temp": sensor.read_air_temperature(),
+                "soil_temp_10cm": sensor.read_soil_temperature(SOIL_DEPTH_1),
+                "soil_temp_30cm": sensor.read_soil_temperature(SOIL_DEPTH_2),
+                "ph": sensor.read_ph(),
                 "timestamp": time.time()
             }
             

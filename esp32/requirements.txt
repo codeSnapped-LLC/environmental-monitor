@@ -1,3 +1,5 @@
 micropython-esp32-i2c
 micropython-esp32-rtc
 umqtt.simple
+micropython-max31865  # For soil temp sensors
+micropython-ph-sensor  # For pH sensor

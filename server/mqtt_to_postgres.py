@@ -21,9 +21,10 @@ def create_table(conn):
     CREATE TABLE IF NOT EXISTS sensor_readings (
         id SERIAL PRIMARY KEY,
         device_id VARCHAR(50),
-        temperature FLOAT,
-        humidity FLOAT,
-        air_quality INTEGER,
+        air_temp FLOAT,
+        soil_temp_10cm FLOAT,
+        soil_temp_30cm FLOAT,
+        ph FLOAT,
         recorded_at TIMESTAMPTZ DEFAULT NOW()
     )
     """

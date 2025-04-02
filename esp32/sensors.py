@@ -13,17 +13,19 @@ class EnvironmentalSensor:
             raise RuntimeError("No I2C devices found")
         print(f"Found I2C devices at: {[hex(d) for d in devices]}")
         
-    def read_temperature(self):
-        """Read temperature in Celsius"""
+    def read_air_temperature(self):
+        """Read air temperature in Celsius"""
         # TODO: Implement actual sensor reading
         return 23.5  # Mock value
         
-    def read_humidity(self):
-        """Read relative humidity percentage"""
+    def read_soil_temperature(self, depth):
+        """Read soil temperature in Celsius at specified depth"""
         # TODO: Implement actual sensor reading
-        return 45.2  # Mock value
+        if depth == SOIL_DEPTH_1:
+            return 19.8  # Mock value for depth 1
+        return 17.2  # Mock value for depth 2
         
-    def read_air_quality(self):
-        """Read air quality (CO2/VOC) in ppm"""
+    def read_ph(self):
+        """Read pH of rainwater"""
         # TODO: Implement actual sensor reading
-        return 412  # Mock value
+        return 6.8  # Mock value

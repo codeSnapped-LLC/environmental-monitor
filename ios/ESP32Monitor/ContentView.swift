@@ -16,9 +16,10 @@ struct ContentView: View {
             // Sensor Data
             if esp32Manager.isConnected {
                 VStack(alignment: .leading) {
-                    Text("Temperature: \(esp32Manager.temperature, specifier: "%.1f")°C")
-                    Text("Humidity: \(esp32Manager.humidity, specifier: "%.1f")%")
-                    Text("Air Quality: \(esp32Manager.airQuality) ppm")
+                    Text("Air Temp: \(esp32Manager.airTemp, specifier: "%.1f")°C")
+                    Text("Soil (10cm): \(esp32Manager.soilTemp10cm, specifier: "%.1f")°C")
+                    Text("Soil (30cm): \(esp32Manager.soilTemp30cm, specifier: "%.1f")°C")
+                    Text("Rain pH: \(esp32Manager.ph, specifier: "%.1f")")
                 }
                 .padding()
             }
@@ -48,9 +49,10 @@ struct ContentView: View {
 class ESP32Manager: NSObject, ObservableObject, CBCentralManagerDelegate {
     @Published var isConnected = false
     @Published var connectionStatus = "Disconnected"
-    @Published var temperature: Double = 0.0
-    @Published var humidity: Double = 0.0
-    @Published var airQuality: Int = 0
+    @Published var airTemp: Double = 0.0
+    @Published var soilTemp10cm: Double = 0.0
+    @Published var soilTemp30cm: Double = 0.0
+    @Published var ph: Double = 7.0
     
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
