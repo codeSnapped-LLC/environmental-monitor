@@ -1,33 +1,40 @@
 # Environmental Monitoring System
 
-A complete IoT solution for monitoring environmental conditions using ESP32 and iOS.
+A distributed IoT solution for environmental monitoring using ESP32 with multiple connectivity options.
 
 ## System Architecture
 
 ```mermaid
 graph TD
-    A[ESP32 Sensor] -->|MQTT| B[Collection Server]
-    B -->|SQL| C[(PostgreSQL)]
-    D[iOS App] -->|BLE/WiFi| A
-    D -->|HTTP| B
+    A[ESP32 Sensor] -->|WiFi| B[Collection Server]
+    A -->|LoRa Mesh| C[Gateway Node]
+    C -->|WiFi| B
+    B -->|SQL| D[(PostgreSQL)]
+    E[iOS Config Tool] -->|BLE| A
+    E -->|HTTP| B
 ```
 
 ## Components
 
 ### 1. ESP32 Sensor Node
 - Measures temperature, humidity, and air quality
-- Sends data via MQTT to collection server
-- Supports both WiFi and BLE connectivity
+- Multiple connectivity options:
+  - WiFi (direct to server)
+  - LoRa Mesh (peer-to-peer)
+  - BLE (configuration only)
+- Self-healing mesh network capability
 
 ### 2. Collection Server
 - MQTT subscriber receiving sensor data
 - Stores data in PostgreSQL database
 - Provides REST API for clients
 
-### 3. iOS Monitoring App
-- Displays real-time sensor data
-- Connects via BLE (direct) or WiFi (through server)
-- Historical data visualization
+### 3. iOS Configuration Tool
+- Device setup and configuration
+- Firmware updates via BLE
+- Network troubleshooting
+- Diagnostic data visualization
+- Mesh network topology viewer
 
 ## Hardware Setup
 
@@ -38,13 +45,18 @@ graph LR
     C[Humidity Sensor] -->|I2C| B
     D[Air Quality Sensor] -->|I2C| B
     B -->|WiFi| E[Router]
-    B -->|BLE| F[iOS App]
+    B -->|LoRa| F[Other Nodes]
+    B -->|BLE| G[iOS Config]
 ```
 
 Pin Configuration:
 - I2C SDA: GPIO8
-- I2C SCL: GPIO9
-- Status LED: GPIO18
+- I2C SCL: GPIO9  
+- LoRa MOSI: GPIO11
+- LoRa MISO: GPIO13
+- LoRa SCK: GPIO12
+- LoRa CS: GPIO10
+- LoRa RST: GPIO3
 
 ## Setup Instructions
 
