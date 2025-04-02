@@ -1,7 +1,7 @@
 from machine import I2C, Pin
 
 class EnvironmentalSensor:
-    def __init__(self, i2c_bus=0, sda_pin=21, scl_pin=22):
+    def __init__(self, i2c_bus=0, sda_pin=8, scl_pin=9):
         """Initialize I2C and sensor hardware"""
         self.i2c = I2C(i2c_bus, sda=Pin(sda_pin), scl=Pin(scl_pin))
         self._scan_i2c_devices()
