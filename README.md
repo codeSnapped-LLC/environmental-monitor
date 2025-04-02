@@ -85,7 +85,23 @@ graph TD
 
 ## Components
 
-### 1. Local Data Collector (Raspberry Pi)
+### 1. Data Collection Services
+- **Local Collector (Raspberry Pi)**  
+  Lightweight MQTT-to-SQLite service for offline/remote deployments
+  ```bash
+  # Build and install
+  cd data-collector-local
+  ./build-deb.sh
+  sudo dpkg -i build/data-collector-local_1.0.0_all.deb
+  ```
+  
+- **Heavy Collector (Cloud Server)**  
+  High-capacity version for centralized deployments with PostgreSQL
+  ```bash
+  cd data-collector-heavy
+  ./build-deb.sh
+  sudo dpkg -i build/data-collector-heavy_1.0.0_amd64.deb
+  ```
 - Lightweight MQTT-to-SQLite collector
 - Designed for offline/remote deployments
 - Features:
