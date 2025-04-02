@@ -3,7 +3,7 @@ Version: 1.0.0
 Section: utils
 Priority: optional
 Architecture: all
-Depends: python3 (>= 3.7), python3-pip, python3-venv
+Depends: python3 (>= 3.7), python3-pip, python3-venv, man-db
 Maintainer: Your Name <your.email@example.com>
 Description: Local data collector for environmental monitoring
  A lightweight MQTT data collector designed for on-premise deployment

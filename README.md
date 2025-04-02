@@ -41,6 +41,28 @@ graph TD
   python server.py
   ```
 
+### Building the Debian Package
+
+To build the Debian package (requires Docker):
+
+```bash
+cd data-collector-local
+chmod +x build-deb.sh
+./build-deb.sh
+```
+
+This will create a `data-collector-local_1.0.0_all.deb` package that can be installed with:
+
+```bash
+sudo dpkg -i data-collector-local_1.0.0_all.deb
+```
+
+The package includes:
+- Systemd service unit
+- Configuration files
+- Manpage documentation
+- Automatic user creation
+
 ### 2. ESP32 Sensor Node
 - Measures:
   - Air temperature and humidity

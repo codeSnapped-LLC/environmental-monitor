@@ -13,6 +13,11 @@ mkdir -p /var/log/data-collector
 chown -R data-collector:data-collector /opt/data-collector
 chown -R data-collector:data-collector /var/log/data-collector
 
+# Install manpage
+if [ -f /usr/share/man/man1/data-collector.1 ]; then
+    gzip -f /usr/share/man/man1/data-collector.1
+fi
+
 # Enable and start service
 systemctl daemon-reload
 systemctl enable data-collector.service
