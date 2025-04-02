@@ -12,7 +12,12 @@ from config import (
     MQTT_USER, 
     MQTT_PASSWORD,
     SOIL_DEPTH_1,
-    SOIL_DEPTH_2
+    SOIL_DEPTH_2,
+    AUTH_MODE,
+    MQTT_CERT_FILE,
+    MQTT_KEY_FILE,
+    MQTT_CA_FILE,
+    MQTT_API_KEY
 )
 
 def connect_mqtt():
