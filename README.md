@@ -25,7 +25,23 @@ graph TD
 
 ## Components
 
-### 1. ESP32 Sensor Node
+### 1. Local Data Collector (Raspberry Pi)
+- Lightweight MQTT-to-SQLite collector
+- Designed for offline/remote deployments
+- Features:
+  - Local SQLite storage (no internet required)
+  - Compatible with same MQTT messages as cloud version
+  - Data retention management
+  - Low resource usage
+- Setup:
+  ```bash
+  cd data-collector-local
+  ./setup.sh
+  source data-collector-env/bin/activate
+  python server.py
+  ```
+
+### 2. ESP32 Sensor Node
 - Measures:
   - Air temperature and humidity
   - Soil temperature at 2 configurable depths  
@@ -93,9 +109,26 @@ sudo -u postgres psql -c "CREATE USER collector WITH PASSWORD 'yourpassword';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sensor_data TO collector;"
 ```
 
+## Deployment Options
+
+### Cloud Deployment (Recommended)
+1. PostgreSQL database server
+2. MQTT broker with TLS
+3. Central collection server
+
+### Local/Offline Deployment
+1. Raspberry Pi or local server
+2. Local MQTT broker (no TLS required)
+3. SQLite-based data collector:
+   ```bash
+   cd data-collector-local
+   ./setup.sh
+   python server.py
+   ```
+
 ## Running the System
 
-1. Start MQTT broker:
+1. Start MQTT broker (for either deployment):
 ```bash
 mosquitto -v
 ```
