@@ -1,16 +1,18 @@
-.TH DATA-COLLECTOR 1 "2025-04-02" "1.0.0" "Data Collector Manual"
+.TH DATA-COLLECTOR-HEAVY 1 "2025-04-02" "2.0.0" "Data Collector Heavy Manual"
 .SH NAME
-data-collector \- Local MQTT to SQLite environmental data collector
+data-collector-heavy \- High-volume MQTT to PostgreSQL environmental data collector
 .SH SYNOPSIS
-.B data-collector
+.B data-collector-heavy
 [\fI\,OPTIONS\/\fR]
 .SH DESCRIPTION
-The data-collector service receives environmental and water quality sensor data via MQTT and stores it in a local SQLite database. It provides a REST API for accessing the collected data, including:
+The data-collector-heavy service receives environmental sensor data from multiple sites via MQTT and stores it in a TimescaleDB PostgreSQL database. Designed for large-scale deployments, it features:
 
-- Air temperature and humidity
-- Soil temperature at multiple depths
-- Water temperature, pH, turbidity and TDS
-- Air quality metrics
+- Multi-site data partitioning
+- Connection pooling
+- Batch processing
+- Automated data retention
+- Horizontal scaling support
+- Time-series optimized storage
 .SH OPTIONS
 .TP
 .B \-\-help
@@ -20,32 +22,35 @@ Show help message and exit
 Show version and exit
 .SH FILES
 .TP
-.I /etc/default/data-collector
+.I /etc/default/data-collector-heavy
 Configuration file for environment variables
 .TP
-.I /opt/data-collector/
-Application directory
+.I /opt/data-collector-heavy/
+Application directory with schema migration tools
 .TP
-.I /var/log/data-collector/
-Log directory
+.I /var/log/data-collector-heavy/
+Log directory with rotated JSON logs
 .SH EXAMPLES
-Start the service:
+Start cluster mode:
 .PP
 .RS
 .nf
-systemctl start data-collector
+systemctl start data-collector-heavy@node1
+systemctl start data-collector-heavy@node2
 .fi
 .RE
 .PP
-Check status:
+Check shard status:
 .PP
 .RS
 .nf
-systemctl status data-collector
+psql -h postgres-cluster -U collector -c "SELECT * FROM pg_stat_replication"
 .fi
 .RE
 .SH SEE ALSO
 .BR systemctl (1),
-.BR journalctl (1)
+.BR journalctl (1),
+.BR psql (1),
+.BR repmgr (1)
 .SH AUTHOR
-Your Name <your.email@example.com>
+Operations Team <ops@example.com>
