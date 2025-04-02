@@ -9,27 +9,12 @@
 /* Begin PBXBuildFile section */
 		0F548619EBB0DC4605FF7AA6 /* ESP32MonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233BE2926BC51ACF05AAED7F /* ESP32MonitorApp.swift */; };
 		22481960C984E73F21C2BAEC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01224CD5306D3A95E4F300F /* ContentView.swift */; };
-		B84D31F5F279684012AA4F09 /* CoreBluetooth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46F6169ACC9F933B1E733B98 /* CoreBluetooth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F135C90A61572A7A16AD7407 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F6169ACC9F933B1E733B98 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		0B1EBDE9BC2E17FB8A3235A3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B84D31F5F279684012AA4F09 /* CoreBluetooth.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		233BE2926BC51ACF05AAED7F /* ESP32MonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESP32MonitorApp.swift; sourceTree = "<group>"; };
-		46F6169ACC9F933B1E733B98 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreBluetooth.framework; sourceTree = "<group>"; };
+		46F6169ACC9F933B1E733B98 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C8E6B4CB693395402841C85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E01224CD5306D3A95E4F300F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F94ADD355F6BBED9DD23F68E /* ESP32Monitor.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ESP32Monitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +76,6 @@
 			buildPhases = (
 				EA2D15E9C08A587992E0D30D /* Sources */,
 				D1B03B92D9ACA2B5652208CE /* Frameworks */,
-				0B1EBDE9BC2E17FB8A3235A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,7 +181,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -255,7 +239,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.ESP32Monitor;
@@ -273,10 +257,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\".\"",
-				);
 				INFOPLIST_FILE = ESP32Monitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -294,10 +274,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\".\"",
-				);
 				INFOPLIST_FILE = ESP32Monitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
