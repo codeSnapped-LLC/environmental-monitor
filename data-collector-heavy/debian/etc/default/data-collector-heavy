@@ -1,0 +1,6 @@
+# Configuration for data-collector-heavy service
+DEBUG=false
+MAX_RECORDS=1000000  # 1 million records
+DATA_DIR="/var/lib/data-collector-heavy"
+BACKUP_DIR="/var/backups/data-collector-heavy"
+LOG_LEVEL="INFO"
