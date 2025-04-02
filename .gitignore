@@ -103,3 +103,10 @@ ios/Pods/
 ios/Podfile.lock
 ios/*.xcworkspace/
 !ios/*.xcworkspace/contents.xcworkspacedata
+
+
+# -----------------------------------------
+# Debian Packages
+# -----------------------------------------
+
+*.deb
