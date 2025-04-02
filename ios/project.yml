@@ -15,5 +15,11 @@ targets:
       base:
         INFOPLIST_FILE: ESP32Monitor/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.yourcompany.ESP32Monitor
+        DEVELOPMENT_TEAM: "" # Add your Apple Developer Team ID here
+    info:
+      path: ESP32Monitor/Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
     dependencies:
       - framework: CoreBluetooth.framework
