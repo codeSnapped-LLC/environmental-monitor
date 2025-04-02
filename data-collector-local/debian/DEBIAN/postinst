@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Create system user
+if ! id -u data-collector >/dev/null 2>&1; then
+    useradd -r -s /bin/false data-collector
+fi
+
+# Create directories
+mkdir -p /opt/data-collector
+mkdir -p /var/log/data-collector
+
+# Set permissions
+chown -R data-collector:data-collector /opt/data-collector
+chown -R data-collector:data-collector /var/log/data-collector
+
+# Enable and start service
+systemctl daemon-reload
+systemctl enable data-collector.service
+systemctl start data-collector.service
+
+exit 0

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Source environment variables
+if [ -f /etc/default/data-collector ]; then
+    . /etc/default/data-collector
+fi
+
+# Run the service
+cd /opt/data-collector
+exec uvicorn server:app --host 0.0.0.0 --port 8000 --no-access-log

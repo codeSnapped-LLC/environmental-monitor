@@ -1,0 +1,18 @@
+[Unit]
+Description=Data Collector Local Service
+After=network.target
+
+[Service]
+User=data-collector
+Group=data-collector
+WorkingDirectory=/opt/data-collector
+EnvironmentFile=/etc/default/data-collector
+ExecStart=/usr/bin/data-collector
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=data-collector
+
+[Install]
+WantedBy=multi-user.target
