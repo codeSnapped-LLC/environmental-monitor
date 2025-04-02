@@ -17,3 +17,11 @@ HUMIDITY_OFFSET = 0.0
 # TinyS3 specific features
 HAS_PSRAM = True
 HAS_BLE = True
+
+# MQTT Configuration
+MQTT_BROKER = "your.server.ip"
+MQTT_PORT = 1883
+MQTT_TOPIC = "sensors/environment"
+MQTT_CLIENT_ID = "esp32-tinys3"
+MQTT_USER = None  # Set if your broker requires authentication
+MQTT_PASSWORD = None

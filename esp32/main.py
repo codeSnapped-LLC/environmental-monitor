@@ -1,28 +1,45 @@
 import time
+import json
 from machine import Pin, I2C
+from umqtt.simple import MQTTClient
 from sensors import EnvironmentalSensor
-from config import SENSOR_UPDATE_INTERVAL
+from config import SENSOR_UPDATE_INTERVAL, MQTT_BROKER, MQTT_PORT, MQTT_TOPIC, MQTT_CLIENT_ID, MQTT_USER, MQTT_PASSWORD
+
+def connect_mqtt():
+    client = MQTTClient(MQTT_CLIENT_ID, MQTT_BROKER, port=MQTT_PORT, 
+                       user=MQTT_USER, password=MQTT_PASSWORD)
+    client.connect()
+    return client
 
 def main():
-    # Initialize sensor
+    # Initialize components
     sensor = EnvironmentalSensor()
+    mqtt_client = connect_mqtt()
     
     print("ESP32 Environmental Sensor Starting...")
     
     while True:
-        # Read sensor data
-        temp = sensor.read_temperature()
-        humidity = sensor.read_humidity()
-        air_quality = sensor.read_air_quality()
-        
-        # Print readings
-        print(f"Temperature: {temp:.1f}°C")
-        print(f"Humidity: {humidity:.1f}%")
-        print(f"Air Quality: {air_quality} ppm")
-        print("---")
-        
-        # Wait before next reading
-        time.sleep(SENSOR_UPDATE_INTERVAL)
+        try:
+            # Read sensor data
+            data = {
+                "temperature": sensor.read_temperature(),
+                "humidity": sensor.read_humidity(),
+                "air_quality": sensor.read_air_quality(),
+                "timestamp": time.time()
+            }
+            
+            # Publish via MQTT
+            mqtt_client.publish(MQTT_TOPIC, json.dumps(data))
+            print(f"Published: {data}")
+            
+            # Wait before next reading
+            time.sleep(SENSOR_UPDATE_INTERVAL)
+            
+        except Exception as e:
+            print(f"Error: {e}")
+            # Reconnect if needed
+            mqtt_client = connect_mqtt()
+            time.sleep(5)
 
 if __name__ == "__main__":
     main()
