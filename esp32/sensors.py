@@ -26,6 +26,16 @@ class EnvironmentalSensor:
             return 19.8  # Mock value for depth 1
         return 17.2  # Mock value for depth 2
         
+    def read_humidity(self):
+        """Read relative humidity percentage"""
+        # TODO: Implement actual sensor reading
+        return 45.2  # Mock value
+        
+    def read_air_quality(self):
+        """Read air quality (VOC/CO2) in ppm"""
+        # TODO: Implement actual sensor reading
+        return 412  # Mock value
+        
     def read_ph(self):
         """Read pH of rainwater"""
         # TODO: Implement actual sensor reading

@@ -22,9 +22,11 @@ def create_table(conn):
         id SERIAL PRIMARY KEY,
         device_id VARCHAR(50),
         air_temp FLOAT,
+        humidity FLOAT,
         soil_temp_10cm FLOAT,
         soil_temp_30cm FLOAT,
         ph FLOAT,
+        air_quality INTEGER,
         recorded_at TIMESTAMPTZ DEFAULT NOW()
     )
     """

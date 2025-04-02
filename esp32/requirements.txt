@@ -3,3 +3,5 @@ micropython-esp32-rtc
 umqtt.simple
 micropython-max31865  # For soil temp sensors
 micropython-ph-sensor  # For pH sensor
+micropython-sht30  # For air temp/humidity
+micropython-sgp30  # For air quality

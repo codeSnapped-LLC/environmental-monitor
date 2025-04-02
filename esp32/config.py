@@ -16,8 +16,10 @@ SOIL_DEPTH_2 = 30  # cm (configurable)
 
 # Sensor calibration values
 AIR_TEMP_OFFSET = 0.0
+HUMIDITY_OFFSET = 0.0
 SOIL_TEMP_OFFSET = 0.0
 PH_OFFSET = 0.0
+AIR_QUALITY_OFFSET = 0.0
 
 # TinyS3 specific features
 HAS_PSRAM = True

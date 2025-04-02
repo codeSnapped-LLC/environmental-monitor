@@ -15,9 +15,11 @@ graph TD
     
     subgraph ESP32 Sensors
         A1[Air Temp] --> A
-        A2[Soil Temp 10cm] --> A
-        A3[Soil Temp 30cm] --> A
-        A4[Rain pH] --> A
+        A2[Humidity] --> A
+        A3[Soil Temp 10cm] --> A
+        A4[Soil Temp 30cm] --> A
+        A5[Rain pH] --> A
+        A6[Air Quality] --> A
     end
 ```
 
@@ -25,9 +27,10 @@ graph TD
 
 ### 1. ESP32 Sensor Node
 - Measures:
-  - Air temperature
-  - Soil temperature at 2 configurable depths
+  - Air temperature and humidity
+  - Soil temperature at 2 configurable depths  
   - Rainwater pH
+  - Air quality (VOC/CO2)
 - Multiple connectivity options:
   - WiFi (direct to server)
   - LoRa Mesh (peer-to-peer)
@@ -52,9 +55,11 @@ graph TD
 ```mermaid
 graph LR
     A[Air Temp Sensor] -->|I2C| B(ESP32)
-    C[Soil Temp 10cm] -->|I2C| B
-    D[Soil Temp 30cm] -->|I2C| B
-    E[Rain pH Sensor] -->|Analog| B
+    C[Humidity Sensor] -->|I2C| B
+    D[Soil Temp 10cm] -->|I2C| B
+    E[Soil Temp 30cm] -->|I2C| B
+    F[Rain pH Sensor] -->|Analog| B
+    G[Air Quality Sensor] -->|I2C| B
     B -->|WiFi| F[Router]
     B -->|LoRa| G[Other Nodes]
     B -->|BLE| H[iOS Config]
