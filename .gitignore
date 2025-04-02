@@ -75,3 +75,31 @@ System Volume Information/
 .vscode/
 *.sublime-*
 .aider*
+
+# -----------------------------------------
+# iOS Development
+# -----------------------------------------
+# Xcode
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
+ios/*.xcworkspace/xcuserdata/
+*.xcuserstate
+*.mode1v3
+*.perspectivev3
+
+# Build products
+ios/DerivedData/
+ios/build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+
+# App-specific
+ios/Pods/
+ios/Podfile.lock
+ios/*.xcworkspace/
+!ios/*.xcworkspace/contents.xcworkspacedata
