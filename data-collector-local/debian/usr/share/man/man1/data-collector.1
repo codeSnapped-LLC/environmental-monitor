@@ -5,7 +5,12 @@ data-collector \- Local MQTT to SQLite environmental data collector
 .B data-collector
 [\fI\,OPTIONS\/\fR]
 .SH DESCRIPTION
-The data-collector service receives environmental sensor data via MQTT and stores it in a local SQLite database. It provides a REST API for accessing the collected data.
+The data-collector service receives environmental and water quality sensor data via MQTT and stores it in a local SQLite database. It provides a REST API for accessing the collected data, including:
+
+- Air temperature and humidity
+- Soil temperature at multiple depths
+- Water temperature, pH, turbidity and TDS
+- Air quality metrics
 .SH OPTIONS
 .TP
 .B \-\-help

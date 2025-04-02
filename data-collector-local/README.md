@@ -76,10 +76,21 @@ Example response:
     "soil_temp_30cm": 16.7,
     "ph": 6.8,
     "air_quality": 342,
+    "water_temp": 18.2,
+    "water_ph": 7.1,
+    "water_turbidity": 12.5,
+    "water_tds": 350,
     "recorded_at": "2025-04-02T14:30:45Z"
   }
 ]
 ```
+
+### Water Monitoring Setup
+For aquatic deployments:
+1. Use waterproof enclosures (IP68 rated)
+2. Calibrate pH/TDS sensors monthly
+3. Place sensors in flowing water when possible
+4. For turbidity, avoid direct sunlight on sensor
 
 ## Database Management
 

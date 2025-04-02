@@ -22,12 +22,24 @@ An open, hackable IoT solution for environmental monitoring using affordable off
 ```mermaid
 pie
     title Sensor Capabilities
-    "Air Temperature" : 25
-    "Humidity" : 25
-    "Soil Conditions" : 20
-    "Water pH" : 15
+    "Air Temperature" : 20
+    "Humidity" : 20
+    "Soil Conditions" : 15
+    "Water Quality" : 30
     "Air Quality" : 15
 ```
+
+### Water Quality Monitoring
+- **Temperature**: Critical for aquatic life and chemical reactions
+- **pH**: Acidity/alkalinity levels (ideal range 6.5-8.5 for most aquatic life)
+- **Turbidity**: Water clarity (measured in NTU)
+- **TDS**: Total Dissolved Solids (measures mineral content)
+
+Recommended sensors:
+- Atlas Scientific pH Kit (~$100)
+- TDS Meter (~$15)
+- Turbidity Sensor (~$30)
+- Waterproof DS18B20 Temperature Sensor (~$10)
 
 ## Get Started in 3 Steps
 

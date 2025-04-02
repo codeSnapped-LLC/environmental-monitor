@@ -39,6 +39,10 @@ def init_db():
         soil_temp_30cm REAL,
         ph REAL,
         air_quality INTEGER,
+        water_temp REAL,
+        water_ph REAL,
+        water_turbidity REAL,
+        water_tds REAL,
         recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
@@ -74,8 +78,9 @@ def on_message(client, userdata, msg):
         
         cursor.execute("""
         INSERT INTO sensor_readings 
-        (device_id, air_temp, humidity, soil_temp_10cm, soil_temp_30cm, ph, air_quality)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (device_id, air_temp, humidity, soil_temp_10cm, soil_temp_30cm, ph, air_quality,
+         water_temp, water_ph, water_turbidity, water_tds)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             data.get("device_id", "unknown"),
             data.get("air_temp"),
@@ -83,7 +88,11 @@ def on_message(client, userdata, msg):
             data.get("soil_temp_10cm"),
             data.get("soil_temp_30cm"),
             data.get("ph"),
-            data.get("air_quality")
+            data.get("air_quality"),
+            data.get("water_temp"),
+            data.get("water_ph"),
+            data.get("water_turbidity"),
+            data.get("water_tds")
         ))
         conn.commit()
         conn.close()
