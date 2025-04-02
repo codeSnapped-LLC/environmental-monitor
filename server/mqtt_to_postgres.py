@@ -31,23 +31,67 @@ POSTGRES_CONFIG = {
 }
 
 def create_table(conn):
-    """Create sensor data table if not exists"""
-    sql = """
-    CREATE TABLE IF NOT EXISTS sensor_readings (
-        id SERIAL PRIMARY KEY,
-        device_id VARCHAR(50),
-        air_temp FLOAT,
-        humidity FLOAT,
-        soil_temp_10cm FLOAT,
-        soil_temp_30cm FLOAT,
-        ph FLOAT,
-        air_quality INTEGER,
-        recorded_at TIMESTAMPTZ DEFAULT NOW()
-    )
-    """
+    """Create tables if they don't exist"""
     with conn.cursor() as cur:
-        cur.execute(sql)
-    conn.commit()
+        # Create sensor data table
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS sensor_readings (
+                id SERIAL PRIMARY KEY,
+                device_id VARCHAR(50),
+                air_temp FLOAT,
+                humidity FLOAT,
+                soil_temp_10cm FLOAT,
+                soil_temp_30cm FLOAT,
+                ph FLOAT,
+                air_quality INTEGER,
+                recorded_at TIMESTAMPTZ DEFAULT NOW()
+            )
+        """)
+        
+        # Create user tables with secure storage
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                username VARCHAR(255) UNIQUE NOT NULL,
+                password_hash VARCHAR(255) NOT NULL,
+                mfa_secret VARCHAR(255),
+                last_login TIMESTAMPTZ,
+                failed_attempts INT DEFAULT 0,
+                locked_until TIMESTAMPTZ,
+                created_at TIMESTAMPTZ DEFAULT NOW(),
+                updated_at TIMESTAMPTZ DEFAULT NOW(),
+                privacy_level INT DEFAULT 1,
+                data_retention_days INT DEFAULT 365
+            );
+            
+            CREATE TABLE IF NOT EXISTS groups (
+                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                name VARCHAR(255) UNIQUE NOT NULL,
+                description TEXT,
+                created_at TIMESTAMPTZ DEFAULT NOW(),
+                permissions JSONB
+            );
+            
+            CREATE TABLE IF NOT EXISTS user_groups (
+                user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+                group_id UUID REFERENCES groups(id) ON DELETE CASCADE,
+                PRIMARY KEY (user_id, group_id)
+            );
+            
+            CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
+        """)
+        conn.commit()
+        
+        # Create default admin user with temporary password
+        from argon2 import PasswordHasher
+        ph = PasswordHasher()
+        temp_password = "Admin@1234Temp!"  # Must be changed on first login
+        cur.execute("""
+            INSERT INTO users (username, password_hash, privacy_level)
+            VALUES (%s, %s, %s)
+            ON CONFLICT (username) DO NOTHING
+        """, ("admin", ph.hash(temp_password), 3))
+        conn.commit()
 
 def on_message(client, userdata, msg):
     """Handle incoming MQTT messages"""
