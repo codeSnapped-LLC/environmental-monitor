@@ -176,7 +176,13 @@ Pin Configuration:
 
 ### ESP32 Requirements
 ```bash
-micropython -m upip install umqtt.simple
+# Install build dependencies
+sudo apt-get install -y jq
+dotnet tool install -g GitVersion.Tool
+
+# Setup environment and build
+./setup_uv.sh
+./build_firmware.sh
 ```
 
 ### Server Requirements

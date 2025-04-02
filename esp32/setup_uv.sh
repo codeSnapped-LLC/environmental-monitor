@@ -10,6 +10,7 @@ NC='\033[0m' # No Color
 VENV_NAME=".venv"
 REQUIREMENTS="requirements.txt"
 PYTHON_CMD="python3"
+FIRMWARE_VERSION=$(dotnet-gitversion | jq -r '.SemVer')
 
 # Function to check if command exists
 command_exists() {
@@ -53,10 +54,20 @@ main() {
         exit 1
     fi
 
-    # Check for pip
+    # Check for pip and jq
     if ! command_exists pip; then
         echo -e "${RED}pip is required but not installed${NC}"
         exit 1
+    fi
+    
+    if ! command_exists jq; then
+        echo -e "${YELLOW}Installing jq for JSON parsing...${NC}"
+        sudo apt-get install -y jq
+    fi
+    
+    if ! command_exists dotnet-gitversion; then
+        echo -e "${YELLOW}Installing GitVersion...${NC}"
+        dotnet tool install -g GitVersion.Tool
     fi
 
     # Create virtual environment

@@ -1,6 +1,9 @@
 import time
 import json
 from machine import Pin, I2C
+
+# Semantic version injected by build system
+FIRMWARE_VERSION = "0.1.0-dev"
 from umqtt.simple import MQTTClient
 from sensors import EnvironmentalSensor
 from config import (
