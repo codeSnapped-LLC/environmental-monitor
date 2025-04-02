@@ -124,8 +124,8 @@ sudo systemctl enable data-collector
 ### Build Process
 ```bash
 # Clone repository
-git clone https://github.com/your-repo/agriculture-monitoring.git
-cd agriculture-monitoring/data-collector-local
+git clone https://github.com/codeSnapped-LLC/environmental-monitor.git
+cd environmental-monitor/data-collector-local
 
 # Build package
 ./build-deb.sh
@@ -169,4 +169,4 @@ Apache 2.0 - See [LICENSE](../LICENSE) file for details.
 
 ## Support
 
-For issues and feature requests, please open an issue on our [GitHub repository](https://github.com/your-repo/agriculture-monitoring).
+For issues and feature requests, please open an issue on our [GitHub repository](https://github.com/codeSnapped-LLC/environmental-monitor).

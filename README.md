@@ -254,3 +254,6 @@ cp server.{crt,key} server/certs/
 - [ ] Add alerting system
 - [ ] Dashboard for data visualization
 - [ ] OTA firmware updates
+
+## GitHub Repository
+The project is hosted at: https://github.com/codeSnapped-LLC/environmental-monitor
