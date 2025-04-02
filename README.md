@@ -12,12 +12,22 @@ graph TD
     B -->|SQL| D[(PostgreSQL)]
     E[iOS Config Tool] -->|BLE| A
     E -->|HTTP| B
+    
+    subgraph ESP32 Sensors
+        A1[Air Temp] --> A
+        A2[Soil Temp 10cm] --> A
+        A3[Soil Temp 30cm] --> A
+        A4[Rain pH] --> A
+    end
 ```
 
 ## Components
 
 ### 1. ESP32 Sensor Node
-- Measures temperature, humidity, and air quality
+- Measures:
+  - Air temperature
+  - Soil temperature at 2 configurable depths
+  - Rainwater pH
 - Multiple connectivity options:
   - WiFi (direct to server)
   - LoRa Mesh (peer-to-peer)
@@ -41,12 +51,13 @@ graph TD
 ### ESP32 TinyS3 Connections
 ```mermaid
 graph LR
-    A[Temperature Sensor] -->|I2C| B(ESP32)
-    C[Humidity Sensor] -->|I2C| B
-    D[Air Quality Sensor] -->|I2C| B
-    B -->|WiFi| E[Router]
-    B -->|LoRa| F[Other Nodes]
-    B -->|BLE| G[iOS Config]
+    A[Air Temp Sensor] -->|I2C| B(ESP32)
+    C[Soil Temp 10cm] -->|I2C| B
+    D[Soil Temp 30cm] -->|I2C| B
+    E[Rain pH Sensor] -->|Analog| B
+    B -->|WiFi| F[Router]
+    B -->|LoRa| G[Other Nodes]
+    B -->|BLE| H[iOS Config]
 ```
 
 Pin Configuration:
