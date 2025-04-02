@@ -74,3 +74,4 @@ System Volume Information/
 .idea/
 .vscode/
 *.sublime-*
+.aider*
