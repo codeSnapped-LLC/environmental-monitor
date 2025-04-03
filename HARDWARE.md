@@ -5,7 +5,7 @@
 ### Core Components
 | Component | Example Product | Price | Purchase Link |
 |-----------|-----------------|-------|---------------|
-| ESP32 Board | TinyS3 ESP32-S3 | $14.95 | [Adafruit](https://www.adafruit.com/product/5400) |
+| ESP32 Board | FeatherS3 ESP32-S3 with u.FL | $22.50 | [Adafruit](https://www.adafruit.com/product/5748) |
 | Air Temp/Humidity | BME280 Sensor | $4.95 | [SparkFun](https://www.sparkfun.com/products/13676) |
 | Soil Temperature | DS18B20 Probe | $7.95 | [Amazon](https://www.amazon.com/DS18B20-Waterproof-Temperature-Stainless-Thermometer/dp/B01DGHG30W) |
 | pH Sensor | Atlas Scientific Kit | $109.95 | [Atlas Scientific](https://atlas-scientific.com/kits/pi-pH-kit/) |
@@ -26,7 +26,8 @@
 
 ### Connectivity
 - LoRa Radio Module (SX1276) - $12
-- WiFi Antenna (2.4GHz) - $8
+- 2.4GHz Dipole Swivel Antenna (RP-SMA) - $6.95 [Adafruit](https://www.adafruit.com/product/944)
+- RP-SMA to u.FL/IPEX Adapter Cable - $3.95 [Adafruit](https://www.adafruit.com/product/852)
 - Bluetooth Beacon - $15
 
 ## Recommended Kits
